@@ -2,10 +2,11 @@ import wordlesolver
 import wordlescript
 import math
 
-
+#getting the words
 words = wordlesolver.getwords()
 wordslen = len(words)
-guess1 = True
+
+#setting up possible answers and precomputed first guesses 
 official = input('Do you want to use the official wordle answer bank:   ').lower()
 if official == 'y':
     possible = words[:2309]
@@ -14,10 +15,15 @@ else:
     possible = words[:]
     wordscores = [['tares', 6.244052544375447], ['lares', 6.199918742453126], ['rales', 6.1643430994542285], ['rates', 6.1462426425146015], ['teras', 6.126619177276175], ['nares', 6.116830765753897], ['soare', 6.11139539909626]]
 
+#change this to false if you want to compute the first guess again
+guess1 = True
 
 running = True
 while running:
+    
+    
     if not guess1:
+        #find what pools guesses narrow it down to
         wordscores = []
         for index, currentword in enumerate(words):
             currentwordscores = []
@@ -31,7 +37,8 @@ while running:
                 else:
                     colourpatterns.append(thecolour)
                     colourcounts.append(1)
-
+            
+            #give the guess a score 
             total = 0
             for i in colourcounts:
                 probability = i / len(possible)
@@ -44,14 +51,14 @@ while running:
                 percent = 100 * (index / wordslen)
                 print(f'{percent}% done')
 
-        print(possible)
+        print("possible answers:\n",possible)
     if guess1:
         guess1 = False
     wordscores.sort(key=itemgetter(1), reverse=True)
     print('computer suggests the words:', wordscores[:7])
-
+    
     guess = input("enter word entered:    ").lower()
     colours = input("enter colours outputted (b,y,g):    ").lower()
     remove = []
-    possible = wordlesolver.removelist(possible, guess, colours)
+    possible = wordlesolver.removelist(possible, guess, colours) # removing impossible words
 

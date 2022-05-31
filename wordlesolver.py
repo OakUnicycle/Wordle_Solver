@@ -1,3 +1,4 @@
+#gets the words from the answers file
 def getwords():
     try:
         with open("answers.txt", "r") as answers:
@@ -6,7 +7,7 @@ def getwords():
     except FileNotFoundError:
         print("file not found")
 
-
+#get the wrong(black) letters from the guess and colours
 def wrongLetters(result, attempt):
     wrong = []
     for ind, char in enumerate(result):
@@ -14,7 +15,7 @@ def wrongLetters(result, attempt):
             wrong.append([attempt[ind], ind])
     return wrong
 
-
+#get the semi-correct(yellow) letters from the guess and colours
 def partialLetters(result, attempt):
     partial = []
     for ind, char in enumerate(result):
@@ -22,7 +23,7 @@ def partialLetters(result, attempt):
             partial.append([attempt[ind], ind])
     return partial
 
-
+#get the correct(green) letters from the guess and colours
 def correctLetters(result, attempt):
     correct = []
     for ind, char in enumerate(result):
@@ -31,6 +32,7 @@ def correctLetters(result, attempt):
     return correct
 
 
+#check if the word is possible
 def check_word(x, col, gue):
     wrong_word = False
     wrong_letters = wrongLetters(col, gue)
@@ -62,9 +64,10 @@ def check_word(x, col, gue):
             if w[0] in word:
                 wrong_word = True
                 break
-    return wrong_word
+    return wrong_word # Returns true if it is a wrong word
 
 
+#removes impossible items from the list
 def removelist(currentlist, guess, colours):
     remove = []
     templist = currentlist[:]
@@ -77,6 +80,7 @@ def removelist(currentlist, guess, colours):
     return templist
 
 
+#a main function so that the code can run on its own to just eliminate words
 def main():
     possible = getwords()
     running = True

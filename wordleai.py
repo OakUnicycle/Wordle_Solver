@@ -1,28 +1,12 @@
 import wordlesolver
 import wordlescript
 import math
-from operator import itemgetter
 
-# def getwords_1st(file):
-#     try:
-#         with open(file, "r") as answers:
-#             words = answers.read().splitlines()
-#         for i in range(len(words)):
-#             words[i] = words[i].split(', ')
-#             words[i][1] = float(words[i][1])
-#         return words
-#     except FileNotFoundError:
-#         print("file not found")
-
-def progress_bar(progress, total):
-    percent = 100 * (progress / float(total))
-    bar = '█' * int(percent) + '-' * (100 - int(percent))
-    print(f'\r|{bar}| {percent:.2f}%', end='\r')
 
 words = wordlesolver.getwords()
 wordslen = len(words)
 guess1 = True
-official = input('are you playing the official wordle (y, n):   ').lower()
+official = input('Do you want to use the official wordle answer bank:   ').lower()
 if official == 'y':
     possible = words[:2309]
     wordscores = [['soare', 5.885202744292758], ['roate', 5.884856313732008], ['raise', 5.878302956493168], ['reast', 5.867738020843561], ['raile', 5.86515382904127], ['slate', 5.855819244109513], ['salet', 5.836022782092482]]

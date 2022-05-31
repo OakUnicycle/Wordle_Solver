@@ -17,4 +17,4 @@ def wordcolours(correctword, guess):
             colours[index] = 'b'
     for i in colours:
         colouroutput = colouroutput + i
-    return colouroutput
+    return colouroutput # returns the colours of if the guess was entered and the correct word was correctword
